@@ -42,9 +42,9 @@ static char touchDownBackgroundColorKey;
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [super touchesBegan:touches withEvent:event];
-    [self cancelBackgroundColor];
     
     if (self.touchDownBackgroundColor) {
+        [self cancelBackgroundColor];
         [self setNormalBackgroundColor:self.backgroundColor];
         self.backgroundColor = self.touchDownBackgroundColor;
     }
@@ -54,14 +54,18 @@ static char touchDownBackgroundColorKey;
 {
     [super touchesCancelled:touches withEvent:event];
     
-    [self performSelector:@selector(cancelBackgroundColor) withObject:nil afterDelay:0.2f];
+    if (self.touchDownBackgroundColor) {
+        [self performSelector:@selector(cancelBackgroundColor) withObject:nil afterDelay:0.2f];
+    }
 }
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [super touchesEnded:touches withEvent:event];
     
-    [self performSelector:@selector(cancelBackgroundColor) withObject:nil afterDelay:0.2f];
+    if (self.touchDownBackgroundColor) {
+        [self performSelector:@selector(cancelBackgroundColor) withObject:nil afterDelay:0.2f];
+    }
 }
 
 - (void)cancelBackgroundColor
