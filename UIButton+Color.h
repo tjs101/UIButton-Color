@@ -11,5 +11,6 @@
 @interface UIButton (Color)
 
 - (void)sr_setTouchDownBackgroundColor:(UIColor *)touchDownBackgroundColor;
+- (void)sr_setTouchDownTextColor:(UIColor *)touchDownTextColor;
 
 @end
